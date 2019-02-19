@@ -2,6 +2,7 @@ import unittest
 
 import numpy as np
 
+from chainer import backend
 from chainer.backends import cuda
 
 from chainer import testing
