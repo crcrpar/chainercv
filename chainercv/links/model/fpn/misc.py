@@ -2,6 +2,7 @@ from __future__ import division
 
 import numpy as np
 
+from chainer import backend
 from chainer.backends import cuda
 import chainer.functions as F
 
@@ -15,7 +16,7 @@ def smooth_l1(x, t, beta):
 
 # to avoid out of memory
 def argsort(x):
-    xp = cuda.get_array_module(x)
+    xp = backend.get_array_module(x)
     i = np.argsort(cuda.to_cpu(x))
     if xp is np:
         return i
@@ -25,7 +26,7 @@ def argsort(x):
 
 # to avoid out of memory
 def choice(x, size):
-    xp = cuda.get_array_module(x)
+    xp = backend.get_array_module(x)
     y = np.random.choice(cuda.to_cpu(x), size, replace=False)
     if xp is np:
         return y

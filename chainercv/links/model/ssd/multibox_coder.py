@@ -4,6 +4,7 @@ import itertools
 import numpy as np
 
 import chainer
+from chainer import backend
 
 from chainercv import utils
 
@@ -99,7 +100,7 @@ class MultiboxCoder(object):
 
     @property
     def xp(self):
-        return chainer.backends.cuda.get_array_module(self._default_bbox)
+        return backend.get_array_module(self._default_bbox)
 
     def to_cpu(self):
         self._default_bbox = chainer.backends.cuda.to_cpu(self._default_bbox)

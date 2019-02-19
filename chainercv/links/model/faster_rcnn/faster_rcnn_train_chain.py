@@ -1,6 +1,7 @@
 import numpy as np
 
 import chainer
+from chainer import backend
 from chainer.backends import cuda
 import chainer.functions as F
 
@@ -161,7 +162,7 @@ def _smooth_l1_loss(x, t, in_weight, sigma):
 
 
 def _fast_rcnn_loc_loss(pred_loc, gt_loc, gt_label, sigma):
-    xp = chainer.backends.cuda.get_array_module(pred_loc)
+    xp = backend.get_array_module(pred_loc)
 
     in_weight = xp.zeros_like(gt_loc)
     # Localization loss is calculated only for positive rois.

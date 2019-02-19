@@ -2,6 +2,7 @@ import numpy as np
 import unittest
 
 import chainer
+from chainer import backend
 from chainer import testing
 from chainer.testing import attr
 
@@ -48,8 +49,7 @@ class TestConstantStubLink(unittest.TestCase):
             self.assertEqual(out.shape, orig.shape)
             self.assertEqual(out.dtype, orig.dtype)
 
-            self.assertEqual(
-                chainer.backends.cuda.get_array_module(out.array), xp)
+            self.assertEqual(backend.get_array_module(out.array), xp)
             out.to_cpu()
             np.testing.assert_equal(out.array, orig)
 

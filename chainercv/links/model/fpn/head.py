@@ -1,6 +1,7 @@
 import numpy as np
 
 import chainer
+from chainer import backend
 from chainer.backends import cuda
 import chainer.functions as F
 from chainer import initializers
@@ -247,7 +248,7 @@ def head_loss_pre(rois, roi_indices, std, bboxes, labels):
     batchsize_per_image = 512
     fg_ratio = 0.25
 
-    xp = cuda.get_array_module(*rois)
+    xp = backend.get_array_module(*rois)
 
     n_level = len(rois)
     roi_levels = xp.hstack(
@@ -335,7 +336,7 @@ def head_loss_post(locs, confs, roi_indices, gt_locs, gt_labels, batchsize):
          :obj:`loc_loss` and :obj:`conf_loss`.
     """
 
-    xp = cuda.get_array_module(locs.array, confs.array)
+    xp = backend.get_array_module(locs.array, confs.array)
 
     roi_indices = xp.hstack(roi_indices).astype(np.int32)
     gt_locs = xp.vstack(gt_locs).astype(np.float32)
@@ -371,7 +372,7 @@ class Caffe2FCUniform(chainer.initializer.Initializer):
 
 
 def _suppress(raw_bbox, raw_score, nms_thresh, score_thresh):
-    xp = cuda.get_array_module(raw_bbox, raw_score)
+    xp = backend.get_array_module(raw_bbox, raw_score)
 
     bbox = []
     label = []

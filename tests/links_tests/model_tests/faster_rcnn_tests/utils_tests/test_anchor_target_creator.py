@@ -33,7 +33,7 @@ class TestAnchorTargetCreator(unittest.TestCase):
     def check_anchor_target_creator(
             self, anchor_target_layer,
             bbox, anchor, img_size):
-        xp = cuda.get_array_module(bbox)
+        xp = backend.get_array_module(bbox)
 
         loc, label = self.anchor_target_layer(
             bbox, anchor, img_size)

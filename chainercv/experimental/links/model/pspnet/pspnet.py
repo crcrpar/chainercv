@@ -4,6 +4,8 @@ from math import ceil
 import numpy as np
 
 import chainer
+from chainer import backend
+from chainer.backends import cuda
 import chainer.functions as F
 from chainer import initializers
 import chainer.links as L
@@ -288,7 +290,7 @@ class PSPNet(chainer.Chain):
                         self._tile_predict, img, self.scales)
                 else:
                     scores = self._tile_predict(img)
-            labels.append(chainer.backends.cuda.to_cpu(
+            labels.append(cuda.to_cpu(
                 self.xp.argmax(scores, axis=0).astype(np.int32)))
         return labels
 
@@ -361,6 +363,6 @@ def _multiscale_predict(predict_method, img, scales):
         if scale != 1.0:
             y = F.resize_images(y, (orig_H, orig_W)).array
         scores.append(y)
-    xp = chainer.backends.cuda.get_array_module(scores[0])
+    xp = backend.get_array_module(scores[0])
     scores = xp.stack(scores)
     return scores.mean(0)[0]  # (C, H, W)

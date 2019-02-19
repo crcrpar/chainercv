@@ -1,4 +1,4 @@
-from chainer.backends import cuda
+from chainer import backend
 import numpy as np
 
 
@@ -22,7 +22,7 @@ def mask_to_bbox(mask):
 
     """
     R, H, W = mask.shape
-    xp = cuda.get_array_module(mask)
+    xp = backend.get_array_module(mask)
 
     instance_index, ys, xs = xp.nonzero(mask)
     bbox = xp.zeros((R, 4), dtype=np.float32)

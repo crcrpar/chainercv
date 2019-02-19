@@ -27,7 +27,7 @@ class TestMaskVoting(unittest.TestCase):
     def check_mask_voting(
             self, seg_prob, bbox, cls_prob,
             size, bg_label, roi_size):
-        xp = chainer.cuda.get_array_module(seg_prob)
+        xp = chainer.backend.get_array_module(seg_prob)
         seg_prob, bbox, label, cls_prob = mask_voting(
             seg_prob, bbox, cls_prob, size,
             0.5, 0.3, 0.5, 0.4, bg_label=bg_label)

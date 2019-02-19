@@ -1,6 +1,7 @@
 import numpy as np
 
 import chainer
+from chainer import backend
 from chainer.backends import cuda
 
 from chainercv.links.model.faster_rcnn.utils.bbox2loc import bbox2loc
@@ -70,7 +71,7 @@ class AnchorTargetCreator(object):
                 is :math:`(S,)`.
 
         """
-        xp = cuda.get_array_module(bbox)
+        xp = backend.get_array_module(bbox)
         bbox = cuda.to_cpu(bbox)
         anchor = cuda.to_cpu(anchor)
 
@@ -159,7 +160,7 @@ def _unmap(data, count, index, fill=0):
 def _get_inside_index(anchor, H, W):
     # Calc indicies of anchors which are located completely inside of the image
     # whose size is speficied.
-    xp = cuda.get_array_module(anchor)
+    xp = backend.get_array_module(anchor)
 
     index_inside = xp.where(
         (anchor[:, 0] >= 0) &

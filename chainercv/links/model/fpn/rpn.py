@@ -3,7 +3,7 @@ from __future__ import division
 import numpy as np
 
 import chainer
-from chainer.backends import cuda
+from chainer import backend
 import chainer.functions as F
 from chainer import initializers
 import chainer.links as L
@@ -224,7 +224,7 @@ def rpn_loss(locs, confs, anchors, sizes,  bboxes):
     locs = F.concat(locs)
     confs = F.concat(confs)
 
-    xp = cuda.get_array_module(locs.array, confs.array)
+    xp = backend.get_array_module(locs.array, confs.array)
 
     anchors = xp.vstack(anchors)
     anchors_yx = (anchors[:, 2:] + anchors[:, :2]) / 2

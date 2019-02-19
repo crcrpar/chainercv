@@ -36,7 +36,7 @@ class TestProposalTargetCreator(unittest.TestCase):
 
     def check_proposal_target_creator(
             self, roi, mask, label, proposal_target_creator):
-        xp = cuda.get_array_module(roi)
+        xp = backend.get_array_module(roi)
         bbox = mask_to_bbox(mask)
         sample_roi, gt_roi_mask, gt_roi_label, gt_roi_loc =\
             proposal_target_creator(

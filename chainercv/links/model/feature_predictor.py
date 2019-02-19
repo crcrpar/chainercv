@@ -2,6 +2,7 @@ import numpy as np
 import warnings
 
 import chainer
+from chainer import backend
 from chainer.backends import cuda
 
 from chainercv.transforms import center_crop
@@ -122,7 +123,7 @@ class FeaturePredictor(chainer.Chain):
                 'If these are batch of 2D spatial features, '
                 'their spatial information would be lost.')
 
-        xp = chainer.backends.cuda.get_array_module(y)
+        xp = backend.get_array_module(y)
         y = y.reshape((-1, n_crop) + y.shape[1:])
         y = xp.mean(y, axis=1)
         return y

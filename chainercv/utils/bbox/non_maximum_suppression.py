@@ -1,6 +1,7 @@
 from __future__ import division
 import numpy as np
 
+from chainer import backend
 from chainer.backends import cuda
 
 from chainercv.utils.bbox._nms_gpu_post import _nms_gpu_post
@@ -56,7 +57,7 @@ def non_maximum_suppression(bbox, thresh, score=None,
 
     """
 
-    xp = cuda.get_array_module(bbox)
+    xp = backend.get_array_module(bbox)
     if xp == np:
         return _non_maximum_suppression_cpu(bbox, thresh, score, limit)
     else:

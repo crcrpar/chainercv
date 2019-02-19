@@ -1,4 +1,4 @@
-from chainer.backends import cuda
+from chainer import backend
 
 
 def bbox_iou(bbox_a, bbox_b):
@@ -30,7 +30,7 @@ def bbox_iou(bbox_a, bbox_b):
     """
     if bbox_a.shape[1] != 4 or bbox_b.shape[1] != 4:
         raise IndexError
-    xp = cuda.get_array_module(bbox_a)
+    xp = backend.get_array_module(bbox_a)
 
     # top left
     tl = xp.maximum(bbox_a[:, None, :2], bbox_b[:, :2])

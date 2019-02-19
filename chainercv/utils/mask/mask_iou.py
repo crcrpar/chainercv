@@ -1,7 +1,7 @@
 from __future__ import division
 
 
-from chainer.backends import cuda
+from chainer import backend
 
 
 def mask_iou(mask_a, mask_b):
@@ -33,7 +33,7 @@ def mask_iou(mask_a, mask_b):
     """
     if mask_a.shape[1:] != mask_b.shape[1:]:
         raise IndexError
-    xp = cuda.get_array_module(mask_a)
+    xp = backend.get_array_module(mask_a)
 
     n_mask_a = len(mask_a)
     n_mask_b = len(mask_b)

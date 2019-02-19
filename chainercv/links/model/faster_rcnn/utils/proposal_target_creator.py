@@ -1,5 +1,6 @@
 import numpy as np
 
+from chainer import backend
 from chainer.backends import cuda
 
 from chainercv.links.model.faster_rcnn.utils.bbox2loc import bbox2loc
@@ -90,7 +91,7 @@ class ProposalTargetCreator(object):
                 value 0 is the background.
 
         """
-        xp = cuda.get_array_module(roi)
+        xp = backend.get_array_module(roi)
         roi = cuda.to_cpu(roi)
         bbox = cuda.to_cpu(bbox)
         label = cuda.to_cpu(label)

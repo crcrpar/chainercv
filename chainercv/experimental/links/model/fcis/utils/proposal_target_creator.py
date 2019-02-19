@@ -1,6 +1,7 @@
 import numpy as np
 
-from chainer import cuda
+from chainer import backend
+from chainer.backends import cuda
 
 from chainercv.links.model.faster_rcnn.utils.bbox2loc import bbox2loc
 from chainercv.transforms.image.resize import resize
@@ -107,7 +108,7 @@ class ProposalTargetCreator(object):
 
         """
 
-        xp = cuda.get_array_module(roi)
+        xp = backend.get_array_module(roi)
         roi = cuda.to_cpu(roi)
         mask = cuda.to_cpu(mask)
         label = cuda.to_cpu(label)

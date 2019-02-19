@@ -1,4 +1,4 @@
-from chainer.backends import cuda
+from chainer import backend
 
 
 class GradientScaling(object):
@@ -20,5 +20,5 @@ class GradientScaling(object):
 
     def __call__(self, rule, param):
         g = param.grad
-        with cuda.get_device_from_array(g):
+        with backend.get_device_from_array(g):
             g *= self.rate
