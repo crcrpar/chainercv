@@ -1,6 +1,7 @@
 import numpy as np
 
 import chainer
+from chainer import backend
 from chainer.backends import cuda
 
 from chainercv.links.model.faster_rcnn.utils.loc2bbox import loc2bbox
@@ -105,7 +106,7 @@ class ProposalCreator(object):
             n_pre_nms = self.n_test_pre_nms
             n_post_nms = self.n_test_post_nms
 
-        xp = cuda.get_array_module(loc)
+        xp = backend.get_array_module(loc)
         loc = cuda.to_cpu(loc)
         score = cuda.to_cpu(score)
         anchor = cuda.to_cpu(anchor)

@@ -224,7 +224,7 @@ def rpn_loss(locs, confs, anchors, sizes,  bboxes):
     locs = F.concat(locs)
     confs = F.concat(confs)
 
-    xp = cuda.get_array_module(locs.array, confs.array)
+    xp = chainer.backend.get_array_module(locs.array, confs.array)
 
     anchors = xp.vstack(anchors)
     anchors_yx = (anchors[:, 2:] + anchors[:, :2]) / 2

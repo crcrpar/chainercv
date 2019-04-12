@@ -2,6 +2,7 @@ import unittest
 
 import numpy as np
 
+from chainer import backend
 from chainer.backends import cuda
 
 from chainer import testing
@@ -33,7 +34,7 @@ class TestProposalTargetCreator(unittest.TestCase):
 
     def check_proposal_target_creator(
             self, bbox, label, roi, proposal_target_creator):
-        xp = cuda.get_array_module(roi)
+        xp = backend.get_array_module(roi)
         sample_roi, gt_roi_loc, gt_roi_label =\
             proposal_target_creator(roi, bbox, label)
 

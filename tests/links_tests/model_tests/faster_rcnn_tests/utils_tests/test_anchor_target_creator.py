@@ -2,6 +2,7 @@ import unittest
 
 import numpy as np
 
+from chainer import backend
 from chainer.backends import cuda
 from chainer import testing
 from chainer.testing import attr
@@ -33,7 +34,7 @@ class TestAnchorTargetCreator(unittest.TestCase):
     def check_anchor_target_creator(
             self, anchor_target_layer,
             bbox, anchor, img_size):
-        xp = cuda.get_array_module(bbox)
+        xp = backend.get_array_module(bbox)
 
         loc, label = self.anchor_target_layer(
             bbox, anchor, img_size)

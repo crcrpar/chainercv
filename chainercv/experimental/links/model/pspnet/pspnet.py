@@ -361,6 +361,6 @@ def _multiscale_predict(predict_method, img, scales):
         if scale != 1.0:
             y = F.resize_images(y, (orig_H, orig_W)).array
         scores.append(y)
-    xp = chainer.backends.cuda.get_array_module(scores[0])
+    xp = chainer.backend.get_array_module(scores[0])
     scores = xp.stack(scores)
     return scores.mean(0)[0]  # (C, H, W)

@@ -1,7 +1,7 @@
 import numpy as np
 
 import chainer
-from chainer.backends import cuda
+from chainer import backend
 import chainer.functions as F
 import chainer.links as L
 
@@ -150,7 +150,7 @@ def _enumerate_shifted_anchor(anchor_base, feat_stride, height, width):
     # cell K shifts (K, 1, 4) to get
     # shift anchors (K, A, 4)
     # reshape to (K*A, 4) shifted anchors
-    xp = cuda.get_array_module(anchor_base)
+    xp = backend.get_array_module(anchor_base)
     shift_y = xp.arange(0, height * feat_stride, feat_stride)
     shift_x = xp.arange(0, width * feat_stride, feat_stride)
     shift_x, shift_y = xp.meshgrid(shift_x, shift_y)

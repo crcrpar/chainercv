@@ -1,4 +1,4 @@
-from chainer.backends import cuda
+from chainer import backend
 
 
 def loc2bbox(src_bbox, loc):
@@ -43,7 +43,7 @@ def loc2bbox(src_bbox, loc):
         \\hat{g}_{ymax}, \\hat{g}_{xmax}`.
 
     """
-    xp = cuda.get_array_module(src_bbox)
+    xp = backend.get_array_module(src_bbox)
 
     if src_bbox.shape[0] == 0:
         return xp.zeros((0, 4), dtype=loc.dtype)

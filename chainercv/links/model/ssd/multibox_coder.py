@@ -99,7 +99,7 @@ class MultiboxCoder(object):
 
     @property
     def xp(self):
-        return chainer.backends.cuda.get_array_module(self._default_bbox)
+        return chainer.backend.get_array_module(self._default_bbox)
 
     def to_cpu(self):
         self._default_bbox = chainer.backends.cuda.to_cpu(self._default_bbox)

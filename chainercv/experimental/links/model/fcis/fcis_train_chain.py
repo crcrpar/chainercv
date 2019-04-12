@@ -3,6 +3,7 @@ from __future__ import division
 import numpy as np
 
 import chainer
+from chainer import backend
 from chainer.backends import cuda
 import chainer.functions as F
 
@@ -148,7 +149,7 @@ class FCISTrainChain(chainer.Chain):
             bbox, anchor, img_size)
 
         # CPU -> GPU
-        if cuda.get_array_module(rpn_loc.array) != np:
+        if backend.get_array_module(rpn_loc.array) != np:
             gt_rpn_loc = cuda.to_gpu(gt_rpn_loc)
             gt_rpn_label = cuda.to_gpu(gt_rpn_label)
 

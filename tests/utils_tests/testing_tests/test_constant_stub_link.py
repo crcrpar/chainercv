@@ -49,7 +49,7 @@ class TestConstantStubLink(unittest.TestCase):
             self.assertEqual(out.dtype, orig.dtype)
 
             self.assertEqual(
-                chainer.backends.cuda.get_array_module(out.array), xp)
+                chainer.backend.get_array_module(out.array), xp)
             out.to_cpu()
             np.testing.assert_equal(out.array, orig)
 

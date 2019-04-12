@@ -1,4 +1,4 @@
-from chainer.backends import cuda
+from chainer import backend
 
 
 def bbox2loc(src_bbox, dst_bbox):
@@ -42,7 +42,7 @@ def bbox2loc(src_bbox, dst_bbox):
         The second axis contains four values :math:`t_y, t_x, t_h, t_w`.
 
     """
-    xp = cuda.get_array_module(src_bbox)
+    xp = backend.get_array_module(src_bbox)
 
     height = src_bbox[:, 2] - src_bbox[:, 0]
     width = src_bbox[:, 3] - src_bbox[:, 1]

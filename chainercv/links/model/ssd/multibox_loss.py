@@ -70,8 +70,8 @@ def multibox_loss(mb_locs, mb_confs, gt_mb_locs, gt_mb_labels, k, comm=None):
     gt_mb_locs = chainer.as_variable(gt_mb_locs)
     gt_mb_labels = chainer.as_variable(gt_mb_labels)
 
-    xp = chainer.backends.cuda.get_array_module(gt_mb_labels.array)
-    with chainer.backends.cuda.get_device_from_array(gt_mb_labels.array):
+    xp = chainer.backend.get_array_module(gt_mb_labels.array)
+    with chainer.backend.get_device_from_array(gt_mb_labels.array):
         positive = gt_mb_labels.array > 0
         n_positive = positive.sum()
 

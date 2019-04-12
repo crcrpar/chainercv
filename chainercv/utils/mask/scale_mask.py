@@ -33,7 +33,7 @@ def scale_mask(mask, bbox, size):
         The dtype should be :obj:`numpy.bool`.
 
     """
-    xp = chainer.backends.cuda.get_array_module(mask)
+    xp = chainer.backend.get_array_module(mask)
     mask = chainer.cuda.to_cpu(mask)
     bbox = chainer.cuda.to_cpu(bbox)
 
